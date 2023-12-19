@@ -3,6 +3,7 @@
 Module documentation goes here
 """
 
+
 class Square:
     """
     Class documentation goes here
