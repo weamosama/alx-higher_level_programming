@@ -13,4 +13,3 @@ class Square:
         Method documentation goes here
         """
         self.__size = size
-
