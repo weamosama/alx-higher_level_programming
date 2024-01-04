@@ -1,17 +1,8 @@
-#!/usr/bin/python3
-"""7-rectangle, built for Holberton Python project 0x08 task 7.
-"""
-
-
 class Rectangle:
     """Takes in args for width and height of a rectangle, and contains methods
     for calculation of the area or perimeter.
 
-    __str__, __repr__, and __del__ functionality defined below. Also includes
-    public class attributes number_of_instances (initialized to 0,
-    incremented during each new instance instantiation, decremented
-    during each instance deletion) and print_symbol (initialized to '#',
-    used as symbol for string representation).
+    __str__ functionality defined below.
 
     Args:
         width (int): horizontal dimension of rectangle, defaults to 0
@@ -110,13 +101,13 @@ class Rectangle:
             (__height * 2).
 
         """
-        if self.__width is 0 or self.__height is 0:
+        if self.__width == 0 or self.__height == 0:
             return 0
         else:
             return (self.__width * 2) + (self.__height * 2)
 
     def _draw_rectangle(self):
-        """Formats a string of '#' and '\n' chars to print the rectangle
+        """Formats a string of '#' chars to print the rectangle
         represented by the current instance.
 
         Attributes:
@@ -126,15 +117,14 @@ class Rectangle:
             str (str): string to constructed for return
 
         Returns:
-            str (str): string suitable for printing rectangle (final newline
-            omitted)
+            str (str): string suitable for printing rectangle
 
         """
         str = ""
         for row in range(self.__height):
             for col in range(self.__width):
                 str += str(Rectangle.print_symbol)
-            if self.__width != 0 and row < (self.__height - 1):
+            if row < (self.__height - 1):
                 str += '\n'
         return str
 
@@ -149,12 +139,11 @@ class Rectangle:
         return self._draw_rectangle()
 
     def __repr__(self):
-        """Returns a string representation of the rectangle to be able to
-        recreate a new instance by using eval().
+        """Returns a string representation of the rectangle.
 
         Returns:
-            A string representation of the rectangle: Rectangle(__width,
-            __height)
+            A string representation that can be used to recreate
+            the current instance using eval().
 
         """
         return "Rectangle({}, {})".format(self.__width, self.__height)
@@ -163,5 +152,5 @@ class Rectangle:
         """Prints a message when an instance of Rectangle is deleted.
 
         """
+        Rectangle.number_of_instances -= 1
         print("Bye rectangle...")
-        Rectangle.number_of_instances -=1
