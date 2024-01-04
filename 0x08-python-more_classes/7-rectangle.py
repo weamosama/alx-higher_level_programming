@@ -1,22 +1,38 @@
+#!/usr/bin/python3
+"""7-rectangle, built for Holberton Python project 0x08 task 7.
+"""
+
+
 class Rectangle:
-    """Takes in args for width and height of a rectangle, and contains methods
-    for calculation of the area or perimeter.
+    """Class for printing or computation of dimensions of a rectangle.
 
-    __str__ functionality defined below.
+    Takes in args for width and height of a rectangle, and contains methods
+    for calculation of the area or perimeter. __str__, __repr__, and __del__
+    fuctionality defined below.
 
-    Args:
-        width (int): horizontal dimension of rectangle, defaults to 0
-        height (int): vertical dimension of rectangle, defaults to 0
+    Attributes:
+        number_of_instances (int): counter incrementing for every
+            instantiation, and decrementing for every instance deletion.
+        print_symbol (str): single character to be used in assembling string
+            representation of rectangle
 
     """
     number_of_instances = 0
-    print_symbol = "#"
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
-        # attribute assignment here engages setters defined below
+        """Increments `number_of_instances` and calls setters for `__width`
+        and `__height`.
+
+        Args:
+            width (int): horizontal dimension of rectangle, defaults to 0
+            height (int): vertical dimension of rectangle, defaults to 0
+
+        """
+        type(self).number_of_instances += 1
+        # attribute assigment here engages setters defined below
         self.width = width
         self.height = height
-        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -98,33 +114,33 @@ class Rectangle:
 
         Returns:
             0 if either attribute is 0, or the perimeter: (__width * 2) +
-            (__height * 2).
+        (__height * 2).
 
         """
-        if self.__width == 0 or self.__height == 0:
+        if self.__width is 0 or self.__height is 0:
             return 0
         else:
             return (self.__width * 2) + (self.__height * 2)
 
     def _draw_rectangle(self):
-        """Formats a string of '#' chars to print the rectangle
+        """Formats a string of '#' and '\n' chars to print the rectangle
         represented by the current instance.
 
         Attributes:
             __width (int): horizontal dimension of rectangle
             __height (int): vertical dimension of rectangle
-            print_symbol (str): symbol used for string representation
             str (str): string to constructed for return
 
         Returns:
-            str (str): string suitable for printing rectangle
+            str (str): string suitable for printing rectangle (final newline
+                omitted)
 
         """
         str = ""
         for row in range(self.__height):
             for col in range(self.__width):
-                str += str(Rectangle.print_symbol)
-            if row < (self.__height - 1):
+                str += "{}".format(self.print_symbol)
+            if self.__width != 0 and row < (self.__height - 1):
                 str += '\n'
         return str
 
@@ -133,24 +149,25 @@ class Rectangle:
 
         Returns:
             The output of _draw_rectangle, which creates a string
-            representation of the rectangle suitable for printing.
+        representation of the rectangle suitable for printing.
 
         """
         return self._draw_rectangle()
 
     def __repr__(self):
-        """Returns a string representation of the rectangle.
+        """Allows use of eval().
 
         Returns:
-            A string representation that can be used to recreate
-            the current instance using eval().
+            A string of the code needed to create the instance.
 
         """
-        return "Rectangle({}, {})".format(self.__width, self.__height)
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
 
-    def __del__(self):
-        """Prints a message when an instance of Rectangle is deleted.
+    @classmethod
+    def __del__(cls):
+        """Decrements `number_of_instances`, then prints message upon
+        deletion of instance.
 
         """
-        Rectangle.number_of_instances -= 1
-        print("Bye rectangle...")
+        cls.number_of_instances -= 1
+        print('Bye rectangle...')
