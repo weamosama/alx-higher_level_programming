@@ -117,7 +117,7 @@ class Rectangle:
         (__height * 2).
 
         """
-        if self.__width is 0 or self.__height is 0:
+        if self.__width == 0 or self.__height == 0:
             return 0
         else:
             return (self.__width * 2) + (self.__height * 2)
@@ -136,13 +136,13 @@ class Rectangle:
                 omitted)
 
         """
-        str = ""
+        result = ""
         for row in range(self.__height):
             for col in range(self.__width):
-                str += "{}".format(self.print_symbol)
-            if self.__width != 0 and row < (self.__height - 1):
-                str += '\n'
-        return str
+                result += str(self.print_symbol)
+            if row < self.__height - 1:
+                result += '\n'
+        return result
 
     def __str__(self):
         """Allows direct printing of instances.
@@ -169,8 +169,6 @@ class Rectangle:
 
         """
         type(self).number_of_instances -= 1
-        if type(self).number_of_instances < 0:
-            type(self).number_of_instances = 0
         print('Bye rectangle...')
 
     @staticmethod
@@ -194,4 +192,6 @@ class Rectangle:
         if not isinstance(rect_2, Rectangle):
             raise TypeError('rect_2 must be an instance of Rectangle')
         if rect_1.area() >= rect_2.area():
-            return rect_
+            return rect_1
+        else:
+            return rect_2
