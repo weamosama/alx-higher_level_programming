@@ -1,0 +1,21 @@
+# Test cases for 1-my_list.py
+
+# Test case with an empty list
+>>> my_list = MyList()
+>>> my_list.print_sorted()
+[]
+
+# Test case with a sorted list
+>>> my_list = MyList([1, 2, 3, 4, 5])
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+# Test case with a reversed list
+>>> my_list = MyList([5, 4, 3, 2, 1])
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+# Test case with a mixed list
+>>> my_list = MyList([7, 2, 9, 1, 5])
+>>> my_list.print_sorted()
+[1, 2, 5, 7, 9]
