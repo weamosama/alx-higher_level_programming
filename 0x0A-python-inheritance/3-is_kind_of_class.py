@@ -8,7 +8,7 @@ Module with method is_kind_of_class
 
 def is_kind_of_class(obj, a_class):
     """
-    Method that returns True if an object is an instance 
+    Method that returns True if an object is an instance
     inherited from, the specified class; otherwise, False.
 
     :param obj: The object to check.
