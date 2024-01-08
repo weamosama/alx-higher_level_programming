@@ -5,6 +5,7 @@ Module with class MyList
 ===========================
 """
 
+
 class MyList(list):
     """Class with method print_sorted"""
 
