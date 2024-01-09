@@ -11,7 +11,7 @@ try:
     # Load existing data from the file
     my_list = load_from_json_file(filename)
 except (FileNotFoundError, ValueError):
-    # If the file doesn't exist or is not a valid JSON, start with an empty list
+    # If the file doesn't exist or start with an empty list
     my_list = []
 
 # Add command-line arguments to the list
