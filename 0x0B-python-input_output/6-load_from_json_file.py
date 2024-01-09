@@ -13,5 +13,10 @@ def load_from_json_file(filename):
     Returns:
         object: The Python object created from the JSON file.
     """
-    with open(filename, mode='r', encoding='utf-8') as file:
-        return json.load(fiile)
+    try:
+        with open(filename, mode='r', encoding='utf-8') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError as e:
+        raise ValueError(f"{e.__class__.__name__} {e}")
