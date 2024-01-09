@@ -19,4 +19,4 @@ def load_from_json_file(filename):
     except FileNotFoundError:
         return None
     except json.JSONDecodeError as e:
-        raise ValueError(f"{e.__class__.__name__} {e}")
+        raise ValueError(f"[{e.__class__.__name__}] {e}")
