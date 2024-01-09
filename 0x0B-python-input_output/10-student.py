@@ -3,28 +3,33 @@
 
 
 class Student:
-    """Defines a student"""
-
     def __init__(self, first_name, last_name, age):
-        """Initializes a student instance with first_name, last_name,age"""
+        """Initialize a Student instance with first_name, last_name, and age."""
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-    """
-    Retrieves a dictionary representation of a Student instance.
+        """
+        Retrieve a dictionary representation of a Student instance.
 
-    Args:
-        attrs (list): A list of attributes to include in the dictionary.
+        Args:
+            attrs (list): A list of attributes to retrieve. If None, retrieve all attributes.
 
-    Returns:
-        dict: A dictionary representation of the Student instance.
-    """
-    if attrs is not None and not isinstance(attrs, list):
-        raise TypeError("attrs must be a list or None")
+        Returns:
+            dict: A dictionary representation of a Student instance.
+        """
+        # Check if attrs is a list
+        if attrs is not None and not isinstance(attrs, list):
+            raise TypeError("attrs must be a list or None")
 
-    if attrs is None:
-        return self.__dict__
-    
-    return {key: getattr(self, key, None) for key in attrs if hasattr(self, key)}
+        # If attrs is None, return the entire dictionary representation
+        if attrs is None:
+            return self.__dict__
+
+        # Retrieve only the specified attributes
+        result = {}
+        for attr in attrs:
+            if hasattr(self, attr):
+                result[attr] = getattr(self, attr)
+        return result
