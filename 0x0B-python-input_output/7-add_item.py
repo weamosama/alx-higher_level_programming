@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-"""Module for saving to json"""
-import json
-import os.path
-import sys
-from sys import argv
+"""Script to load, add, and save items to a Python list."""
 
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+import sys
+from 5-save_to_json_file import save_to_json_file
+from 6-load_from_json_file import load_from_json_file
 
 filename = "add_item.json"
-json_list = []
 
-if os.path.exists(filename):
-    json_list = load_from_json_file(filename)
+try:
+    # Load existing data from the file
+    my_list = load_from_json_file(filename)
+except (FileNotFoundError, ValueError):
+    # If the file doesn't exist or is not a valid JSON, start with an empty list
+    my_list = []
 
-for index in argv[1:]:
-    json_list.append(index)
+# Add command-line arguments to the list
+my_list.extend(sys.argv[1:])
 
-save_to_json_file(json_list, filename)
+# Save the updated list to the file
+save_to_json_file(my_list, filename)
