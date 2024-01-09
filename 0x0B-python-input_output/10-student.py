@@ -12,8 +12,19 @@ class Student:
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieves a dictionary representation of a Student instanc"""
-        if attrs is None or not all(isinstance(attr, str) for attr in attrs):
-            return self.__dict__
-        else:
-            return {attr: getattr(self, attr, None) for attr in attrs}
+    """
+    Retrieves a dictionary representation of a Student instance.
+
+    Args:
+        attrs (list): A list of attributes to include in the dictionary.
+
+    Returns:
+        dict: A dictionary representation of the Student instance.
+    """
+    if attrs is not None and not isinstance(attrs, list):
+        raise TypeError("attrs must be a list or None")
+
+    if attrs is None:
+        return self.__dict__
+    
+    return {key: getattr(self, key, None) for key in attrs if hasattr(self, key)}
