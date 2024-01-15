@@ -105,34 +105,3 @@ class Rectangle(Base):
             int: The area of the rectangle.
         """
         return self.__width * self.__height
-
-    def display(self):
-        """ Display the rectangle with #, considering x and y. """
-        for _ in range(self.__y):
-            print()
-        for _ in range(self.__height):
-            print(" " * self.__x + "#" * self.__width)
-
-    def __str__(self):
-        """ String representation of the rectangle.
-
-        Returns:
-            str: [Rectangle] (<id>) <x>/<y> - <width>/<height>
-        """
-        return "[Rectangle] ({}) {}/{} - {}/{}"
-    .format(self.id, self.__x, self.__y, self.__width, self.__height)
-
-    def update(self, *args, **kwargs):
-        """ Update the attributes of the rectangle.
-
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-        """
-        if args:
-            attr_names = ["id", "width", "height", "x", "y"]
-            for i, arg in enumerate(args):
-                setattr(self, attr_names[i], arg)
-        else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
