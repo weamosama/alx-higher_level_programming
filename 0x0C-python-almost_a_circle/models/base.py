@@ -1,19 +1,18 @@
 #!/usr/bin/python3
-"""
-Base module
-"""
+""" Module defining the Base class. """
 import json
 
 
 class Base:
-    """
-    Base class for other classes
-    """
+    """ The Base class. """
+
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """
-        Initialize a new instance of Base
+        """ Constructor for Base class.
+
+        Args:
+            id (int): The identifier for the instance.
         """
         if id is not None:
             self.id = id
@@ -23,8 +22,13 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """
-        Converts a list of dictionaries to a JSON string
+        """ Return the JSON string representation of list_dictionaries.
+
+        Args:
+            list_dictionaries (list): List of dictionaries.
+
+        Returns:
+            str: The JSON string representation.
         """
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
@@ -32,8 +36,13 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """
-        Saves a list of objects to a file in JSON format
+        """ Write the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): List of instances.
+
+        Returns:
+            None
         """
         filename = cls.__name__ + ".json"
         with open(filename, mode='w', encoding='utf-8') as file:
@@ -45,37 +54,50 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
+        """ Return the list of the JSON string representation json_string.
+
+        Args:
+            json_string (str): JSON string representing a list of dictionaries.
+
+        Returns:
+            list: The list represented by json_string.
         """
-        Converts a JSON string to a list of dictionaries
-        """
-        if json_string is None or json_string == "":
+        if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
-        """
-        Creates an instance with attributes set from a dictionary
+        """ Return an instance with all attributes already set.
+
+        Args:
+            **dictionary: Double pointer to a dictionary.
+
+        Returns:
+            instance: An instance of the class with attributes set.
         """
         if cls.__name__ == "Rectangle":
-            new_instance = cls(1, 1)
+            dummy_instance = cls(1, 1)
         elif cls.__name__ == "Square":
-            new_instance = cls(1)
+            dummy_instance = cls(1)
         else:
-            new_instance = None
-        new_instance.update(**dictionary)
-        return new_instance
+            dummy_instance = None
+
+        dummy_instance.update(**dictionary)
+        return dummy_instance
 
     @classmethod
     def load_from_file(cls):
-        """
-        Loads objects from a file and returns a list of instances
+        """ Return a list of instances.
+
+        Returns:
+            list: A list of instances.
         """
         filename = cls.__name__ + ".json"
         try:
             with open(filename, mode='r', encoding='utf-8') as file:
-                json_str = file.read()
-                list_dicts = cls.from_json_string(json_str)
+                content = file.read()
+                list_dicts = cls.from_json_string(content)
                 return [cls.create(**d) for d in list_dicts]
         except FileNotFoundError:
             return []
