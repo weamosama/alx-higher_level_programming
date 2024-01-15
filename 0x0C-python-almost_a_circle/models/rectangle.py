@@ -34,12 +34,8 @@ class Rectangle(Base):
         Args:
             value (int): The value to set for width.
         """
-        if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        elif value <= 0:
-            raise ValueError("width must be > 0")
-        else:
-            self.__width = value
+        self.validate_non_negative_integer(value, "width")
+        self.__width = value
 
     @property
     def height(self):
@@ -53,12 +49,8 @@ class Rectangle(Base):
         Args:
             value (int): The value to set for height.
         """
-        if not isinstance(value, int):
-            raise TypeError("height must be an integer")
-        elif value <= 0:
-            raise ValueError("height must be > 0")
-        else:
-            self.__height = value
+        self.validate_non_negative_integer(value, "height")
+        self.__height = value
 
     @property
     def x(self):
@@ -72,12 +64,8 @@ class Rectangle(Base):
         Args:
             value (int): The value to set for x.
         """
-        if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        elif value < 0:
-            raise ValueError("x must be >= 0")
-        else:
-            self.__x = value
+        self.validate_non_negative_integer(value, "x")
+        self.__x = value
 
     @property
     def y(self):
@@ -91,12 +79,8 @@ class Rectangle(Base):
         Args:
             value (int): The value to set for y.
         """
-        if not isinstance(value, int):
-            raise TypeError("y must be an integer")
-        elif value < 0:
-            raise ValueError("y must be >= 0")
-        else:
-            self.__y = value
+        self.validate_non_negative_integer(value, "y")
+        self.__y = value
 
     def area(self):
         """ Calculate the area of the rectangle.
@@ -104,14 +88,14 @@ class Rectangle(Base):
         Returns:
             int: The area of the rectangle.
         """
-        return self.__width * self.__height
+        return self.width * self.height
 
     def display(self):
-        """ Display the rectangle with #, considering x and y. """
-        for _ in range(self.__y):
+        """ Display the rectangle using '#' characters. """
+        for _ in range(self.y):
             print()
-        for _ in range(self.__height):
-            print(" " * self.__x + "#" * self.__width)
+        for _ in range(self.height):
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
         """ String representation of the rectangle.
@@ -120,8 +104,7 @@ class Rectangle(Base):
             str: [Rectangle] (<id>) <x>/<y> - <width>/<height>
         """
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
-         self.id, self.__x, self.__y, self.__width, self.__height
-         )
+         self.id, self.x, self.y, self.width, self.height)
 
     def update(self, *args, **kwargs):
         """ Update the attributes of the rectangle.
@@ -137,3 +120,17 @@ class Rectangle(Base):
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """ Convert the rectangle to a dictionary.
+
+        Returns:
+            dict: The dictionary representation of the rectangle.
+        """
+        return {
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+            "x": self.x,
+            "y": self.y
+        }
