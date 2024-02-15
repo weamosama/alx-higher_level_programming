@@ -1,11 +1,11 @@
--- 13-count_shows_by_genre.sql
+-- lists all genres contained in hbtn_0d_ and the number of shows linked to each
+   -- Each record should display:
+      -- <TV Show genre> - <Number of shows linked to this genre>
+   -- Results must be sorted in descending order by the number of shows linkeda
+   -- The database name will be passed as an argument of the mysql command
 
--- Use the 'hbtn_0d_tvshows' database
-USE hbtn_0d_tvshows;
-
--- Select genres and count of shows linked to each genre
-SELECT tv_show_genres.genre_id AS genre, COUNT(tv_show_genres.tv_show_id) AS number_of_shows
-FROM tv_show_genres
-GROUP BY genre
+SELECT name AS genre, COUNT(*) AS number_of_shows FROM tv_genres
+JOIN tv_show_genres ON id=tv_show_genres.genre_id
+GROUP BY tv_show_genres.genre_id
 ORDER BY number_of_shows DESC;
 
